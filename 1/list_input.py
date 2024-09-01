@@ -13,8 +13,9 @@ def main():
     args = command_line_args()
     logging.basicConfig(level=args.log)
 
-    # TODO: fix the followings
-    logging.info("Result: {}".format())
+    # The following line is added for the answer
+    lst = args.num
+    logging.info("Result: {}".format(sum(lst)))
 
 if __name__ == "__main__":
     main()
