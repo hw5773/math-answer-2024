@@ -9,11 +9,48 @@ def extract_variables(expression):
     sorted_variable_set = sorted(set(re.findall(r'\b[a-z]\b', expression)))
     return sorted_variable_set
 
+def make_combinations(n):
+    if n == 1:
+        return [[True], [False]]
+    else:
+        tmp = make_combinations(n-1)
+        ret = []
+        for c in tmp:
+            c1 = copy.copy(c)
+            c1.append(True)
+            c2 = copy.copy(c)
+            c2.append(False)
+            ret.append(c1)
+            ret.append(c2)
+        return ret
+
 def truth_table(expression):
-    raise NotImplementedError
+    vlst = extract_variables(expression)
+    n = len(vlst)
+    combinations = make_combinations(n)
+
+    for c in combinations:
+        for idx in range(len(vlst)):
+            exec("{}={}".format(vlst[idx], c[idx]))
+        ret = eval(expression)
+        c.append(ret)
+
+    return combinations
 
 def print_truth_table(expression):
-    raise NotImplementedError
+    table = truth_table(expression)
+    vlst = extract_variables(expression)
+    logging.debug("vlst: {}".format(vlst))
+    logging.debug("table: {}".format(table))
+
+    for v in vlst:
+        print ("{}\t".format(v), end="")
+    print("{}".format(expression))
+
+    for row in table:
+        for elem in row:
+            print ("{}\t".format(elem), end="")
+        print("")
 
 def command_line_args():
     parser = argparse.ArgumentParser()

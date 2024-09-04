@@ -16,11 +16,15 @@ class Infix(object):
 
 @Infix
 def implies(p, q):
-    raise NotImplementedError
+    ret = eval("not p or q")
+    return ret
 
 @Infix
 def iff(p, q):
-    raise NotImplementedError
+    ret1 = eval("not p or q")
+    ret2 = eval("not q or p")
+    ret = eval("ret1 and ret2")
+    return ret
 
 @Infix
 def xor(p, q):
@@ -31,6 +35,9 @@ def xor(p, q):
 
 @Infix
 def eq(p, q):
-    raise NotImplementedError
+    ret1 = eval("p and q")
+    ret2 = eval("not p and not q")
+    ret = eval("ret1 or ret2")
+    return ret
 
 

@@ -1,0 +1,17 @@
+from operators import xor, implies, iff
+
+exec("p=True")
+exec("q=True")
+print ("When p is True q is False")
+ret = eval("not p")
+print ("not p is {}".format(ret))
+ret = eval("p and q")
+print ("p and q is {}".format(ret))
+ret = eval("p or q")
+print ("p or q is {}".format(ret))
+ret = eval("p |xor| q")
+print ("p xor q is {}".format(ret))
+ret = eval("p |implies| q")
+print ("p implies q is {}".format(ret))
+ret = eval("p |iff| q")
+print ("p iff q is {}".format(ret))
